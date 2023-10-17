@@ -7,6 +7,7 @@ SYS_READ    equ 3
 SYS_WRITE   equ 4
 STDIN       equ 0
 STDOUT      equ 1
+STDOP       equ 2
 
 section .data       ;seção de dados iniciada
                     ;chamada (mensagem) para informar 1º número
@@ -20,9 +21,9 @@ section .data       ;seção de dados iniciada
     len3 equ $ -msg3
     
 section .bss        ;seção de declaração de variáveis a serem processadas
-    num1 resb 2
-    num2 resb 2
-    res resb 3
+    num1 resb STDOP
+    num2 resb STDOP
+    res resb STDOP
     
 section .text       ;seção de execução
     global _start
@@ -40,7 +41,7 @@ _start:             ;iniciando programação
     mov eax, SYS_READ
     mov ebx, STDIN
     mov ecx, num1
-    mov edx, 2
+    mov edx, STDOP
     int 0x80
     
                     ;imprime a string 2
@@ -54,7 +55,7 @@ _start:             ;iniciando programação
     mov eax, SYS_READ
     mov ebx, STDIN
     mov ecx, num2
-    mov edx, 2
+    mov edx, STDOP
     int 0x80
     
     ;move o primeiro número para o registro eax e subtrai o ASCII 0 para converter pro DEC (decimal)
@@ -85,5 +86,5 @@ _start:             ;iniciando programação
     mov eax, SYS_WRITE
     mov ebx, STDOUT
     mov ecx, res
-    mov edx, 2
+    mov edx, STDOP
     int 0x80
