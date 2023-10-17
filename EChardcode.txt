@@ -1,0 +1,51 @@
+;Programa Hardcode Gabriel Vinicius Nogueira
+;Introdução ao Assembly
+;Author: Gabriel Vinicius Nogueira, FEAP
+;Version: Gabriel Vinicius Nogueira, curso Engenharia da Computação
+
+SAIDA       equ 1
+LEITURA     equ 3
+ESCREVE     equ 4
+STANDIN     equ 0
+STANDOUT    equ 1
+STANDOPEN   equ 2
+
+section .data ; SEÇÃO DOS DADOS
+    msg1 db "A soma é: "
+    len1 equ $ - msg1
+    
+section .bss ; SEÇÃO DE CRIAÇÃO DAS VARIÁVEIS
+    res resb STANDOPEN
+    
+section .text ; SEÇÃO DE EXECUÇÃO
+    global _start
+    
+_start:
+
+    mov eax, LEITURA
+    mov ebx, ESCREVE
+    
+    add eax, ebx
+    
+    add eax, "0"
+    
+    mov [res], eax
+    
+    ;IMPRIME msg1
+    mov eax, ESCREVE
+    mov ebx, STANDOUT
+    mov ecx, msg1
+    mov edx, len1
+    int 0x80
+    
+    ;IMPRIME res
+    mov eax, ESCREVE
+    mov ebx, STANDOUT
+    mov ecx, res
+    mov edx, STANDOPEN
+    int 0x80
+    
+exit:
+    mov eax, STANDOUT
+    xor ebx, ebx
+    int 0x80
