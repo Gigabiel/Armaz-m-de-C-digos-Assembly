@@ -1,4 +1,4 @@
-;Soma de Dois Números de 1 Digíto
+;Saudações ao Usuário
 ;Introdução ao Assembly
 ;Author: Gabriel Vinicius Nogueira, FEAP
 ;Version: Gabriel Vinicius Nogueira, curso Engenharia da Computação
